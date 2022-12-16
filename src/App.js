@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {useSelector,useDispatch} from 'react-redux'
+import {Increment,Decrement,Loged_in} from './action'
 
 function App() {
+
+  const counter_reducer=useSelector(state=>state.Counter);
+  const loged_in_reducer=useSelector(state=>state.Islogedin);
+
+  const dispatch=useDispatch();
+
+  let button_status='';
+  if(loged_in_reducer===false)
+  {
+    button_status='Log-in'
+  }
+  else{
+    button_status='Log-out'
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <h2>Conter : {counter_reducer}</h2>  
+    <button onClick={()=>dispatch(Decrement())}>Decrement</button>
+    <button onClick={()=>dispatch(Increment())}>Incement</button>
+    {loged_in_reducer?<p>This is Valuable Information</p>:<p>Please login</p>}
+    <button onClick={()=>dispatch(Loged_in())}>{button_status}</button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

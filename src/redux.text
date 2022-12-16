@@ -1,0 +1,48 @@
+
+//Store
+
+//Action
+const Increment=()=>{
+  return{
+    type:'INCREMENT'
+  }
+}
+
+const Decrement=()=>{
+  return{
+    type:'DECREMENT'
+  }
+}
+
+//Reducer
+
+const counter=(state=0,action)=>{
+  switch(action.type)
+  {
+    case 'INCREMENT':
+      return state+1;
+    break;
+    case 'DECREMENT':
+      return state-1;
+      break;
+      default:
+        return state
+
+  }
+
+}
+
+const store=createStore(counter)
+
+//display state value in console
+
+store.subscribe(()=>{
+console.log(store.getState())
+})
+
+//dispatch
+
+store.dispatch(Increment())
+store.dispatch(Increment())
+store.dispatch(Increment())
+store.dispatch(Decrement())
